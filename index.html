@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="products.css">
+</head>
+
+<body>
+
+    <div class="main_win" id="main_win">
+        <div>
+            <h3 class="header">Add Product</h3>
+            Name: <input type="text" id="Name" class="inputs">
+            Price: <input type="text" id="Price" class="inputs">
+            Class: <input type="text" id="Class" class="inputs">
+        </div>
+        <div style="display: flex;">
+            <div class="buttons">
+                <button class="btn" onclick="addProduct()">Submit</button>
+                <button class="btn" onclick="">Check</button>
+            </div>
+            <div id="clocker" class="clock">
+
+            </div>
+        </div>
+    </div>
+    <div class="small_win" id="viewer" style="background-color: white; border: 1px solid black;"></div>
+    <script>
+        const MY_SERVER = "http://localhost:3000/products"
+        let myProducts = []
+        let dayTime = "AM"
+
+        const timeGiver= () => {
+            let myTime = new Date()
+            let seconds = myTime.getSeconds();
+            seconds = seconds > 9 ? seconds : "0" + seconds
+            let minutes = myTime.getMinutes();
+            minutes = minutes > 9 ? minutes : "0" + minutes
+            let hours = myTime.getHours();
+            let dayTime = hours < 12 ? "AM" : "PM"
+            clocker.innerHTML = `
+            ${hours}:${minutes}:${seconds}:${dayTime}
+            `
+            
+            main_win.style.backgroundColor= `rgb(${(seconds * 20) & 250}, ${(seconds * 30) & 250}, ${(seconds * 40) & 250})` 
+             
+        }
+
+        
+
+
+        const addProduct = () => {
+            axios.post(MY_SERVER, {
+                Name: Name.value,
+                Price: Price.value,
+                Class: Class.value
+            })
+        }
+
+        const del = (id) => axios.delete(MY_SERVER + "/" + id)
+
+        const upd = (id) => {
+            axios.put(MY_SERVER + "/" + id, {
+                Name: Name.value,
+                Price: Price.value,
+                Class: Class.value
+            })
+        }
+
+        const getAll = async () => {
+            myProducts = await axios.get(MY_SERVER)
+            myProducts = myProducts.data
+            dispViewer()
+        }
+
+        const dispViewer = () => {
+            viewer.innerHTML = myProducts.map(product => `
+            <div class="small_win">
+                Product: Name: ${product.Name},
+                Price: ${product.Price}, Class: ${product.Class}
+                <button class="btn" onclick=del(${product.id})>del</button>
+                <button class="btn" onclick=upd(${product.id})>upd</button>
+            </div>`
+            ).join("")
+            timeGiver()
+        }
+
+        setInterval(getAll, 1000)
+    </script>
+</body>
+
+</html>

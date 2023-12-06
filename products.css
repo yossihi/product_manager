@@ -1,0 +1,46 @@
+.inputs {
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    margin-right: 3px;
+    color: brown;
+}
+
+.header {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.991);
+}
+
+.main_win {
+    display: block;
+    border: 1px solid black;
+    padding: 15px;
+    margin: 5px;
+    background-color: rgb(150, 179, 231);
+}
+
+.buttons {
+    width: 90%;
+    align-items: center;
+    margin: 15px;
+}
+
+.btn {
+    margin: 5px;
+    background-color: transparent;
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: large;
+    border: 2px solid black;
+}
+
+.small_win {
+    border: 1 solid blue;
+    background-color: khaki;
+    margin: 5px;
+    padding: 10px;
+}
+
+.clock {
+    font-size: x-large;
+    padding: 15px;
+}
