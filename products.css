@@ -2,7 +2,7 @@
     background-color: transparent;
     backdrop-filter: blur(10px);
     margin-right: 3px;
-    color: brown;
+    color: rgb(3, 3, 3);
 }
 
 .header {

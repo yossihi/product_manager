@@ -46,7 +46,8 @@
             ${hours}:${minutes}:${seconds}:${dayTime}
             `
             
-            main_win.style.backgroundColor= `rgb(${(seconds * 20) & 250}, ${(seconds * 30) & 250}, ${(seconds * 40) & 250})` 
+            main_win.style.backgroundColor= `rgb(${(hours * 10) % 250}, ${(minutes * 10) % 250}, ${(seconds * 40) % 250})` 
+            main_win.style.color= `rgb(${(hours) % 250}, ${(minutes) % 250}, ${(seconds) % 250})` 
              
         }
 
